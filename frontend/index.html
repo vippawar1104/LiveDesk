@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LiveDesk — Realtime Multimodal Copilot</title>
+    <meta name="description" content="LiveDesk is a realtime multimodal AI copilot. Talk, type, share your camera or screen — the agent listens, watches, and guides in real time." />
+    <link rel="stylesheet" href="/static/style.css?v=9" />
+  </head>
+  <body>
+    <!-- Grain texture overlay -->
+    <div class="grain-overlay" aria-hidden="true"></div>
+
+    <!-- ===== Navbar ===== -->
+    <nav class="navbar">
+      <div class="navbar-inner">
+        <div class="navbar-brand">
+          <span class="brand-dot"></span>
+          LiveDesk
+        </div>
+        <div class="navbar-links">
+          <a href="#features">Features</a>
+          <a href="#how-it-works">How it Works</a>
+        </div>
+        <div class="navbar-actions">
+          <div id="status" class="status disconnected">Disconnected</div>
+          <button id="feedbackBtn" class="btn btn-secondary btn-small">Feedback</button>
+          <button id="connectBtnNav" class="btn btn-primary btn-arrow">Connect</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===== Landing / Auth Section ===== -->
+    <div class="auth-section" id="auth-section">
+
+      <!-- Hero -->
+      <div class="page-container">
+        <section class="hero-section">
+          <div class="hero-layout">
+            <div class="hero-content">
+              <!-- Decorative glow -->
+              <div class="hero-glow" aria-hidden="true"></div>
+              <div class="section-label">Realtime Multimodal Copilot</div>
+              <h1 class="hero-heading">Talk to an agent that can listen, watch, and guide.</h1>
+              <p class="hero-description">
+                Speak naturally, type when needed, or share your camera or screen — the agent responds to what it actually sees and hears, in real time.
+              </p>
+              <div class="hero-actions">
+                <div class="session-select-wrap">
+                  <label for="modelSelect">Model</label>
+                  <select id="modelSelect" class="model-select">
+                    <option value="gemini-3.1-flash-live-preview">Gemini 3.1 Flash Live Preview</option>
+                    <option value="gemini-2.5-flash-native-audio-preview-12-2025">Gemini 2.5 Flash Live Preview</option>
+                  </select>
+                </div>
+                <div class="session-select-wrap">
+                  <label for="voiceSelect">Voice</label>
+                  <select id="voiceSelect" class="model-select">
+                    <option value="Puck">Puck</option>
+                    <option value="Kore">Kore</option>
+                    <option value="Charon">Charon</option>
+                    <option value="Aoede">Aoede</option>
+                    <option value="Fenrir">Fenrir</option>
+                    <option value="Leda">Leda</option>
+                  </select>
+                </div>
+                <button id="connectBtn" class="btn btn-primary btn-arrow">Connect</button>
+                <button id="feedbackBtnHero" class="btn btn-secondary">Give Feedback</button>
+              </div>
+            </div>
+            <div class="hero-demo-card">
+              <div class="demo-flow">
+                <div class="demo-bubble assistant">Hi! I'm LiveDesk. I can help through voice, camera, or screen sharing.</div>
+                <div class="demo-bubble user-demo">Can you see my screen?</div>
+                <div class="demo-bubble assistant">Yes, I can see your IDE. It looks like there's a syntax error on line 42.</div>
+                <div class="demo-bubble user-demo">Fix it for me</div>
+              </div>
+              <div class="demo-entities">
+                <div class="demo-entity">
+                  <div class="demo-entity-dot user-dot">Y</div>
+                  <span>You</span>
+                </div>
+                <svg width="60" height="2" viewBox="0 0 60 2" fill="none"><line x1="0" y1="1" x2="60" y2="1" stroke="#e5e5e3" stroke-width="1" stroke-dasharray="4 3"/></svg>
+                <div class="demo-entity">
+                  <div class="demo-entity-dot ai-dot">L</div>
+                  <span>LiveDesk</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Features -->
+      <div class="page-container">
+        <section class="features-section" id="features">
+          <div class="section-label">Features</div>
+          <h2 class="features-heading">Purpose-built for live voice, camera, and screen sessions.</h2>
+          <p class="features-subtext">
+            No more copy-pasting screenshots or explaining what you see. LiveDesk joins your context directly.
+          </p>
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+              </div>
+              <h3>Voice First</h3>
+              <p>Natural back-and-forth audio with low-latency responses. Speak freely — no need to type everything.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </div>
+              <h3>Visual Context</h3>
+              <p>Share your camera or screen when the answer depends on what's visible. The agent sees what you see.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <h3>Grounded Behavior</h3>
+              <p>The agent says when it's unsure, avoids unsafe guidance, and stays concise. No bluffing.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Scrolling Ticker -->
+      <div class="ticker-strip" aria-hidden="true">
+        <div class="ticker-track">
+          <span>Voice First</span><span class="ticker-dot"></span>
+          <span>Visual Context</span><span class="ticker-dot"></span>
+          <span>Screen Sharing</span><span class="ticker-dot"></span>
+          <span>Camera Feed</span><span class="ticker-dot"></span>
+          <span>Low Latency</span><span class="ticker-dot"></span>
+          <span>Grounded AI</span><span class="ticker-dot"></span>
+          <span>Multilingual</span><span class="ticker-dot"></span>
+          <span>Voice First</span><span class="ticker-dot"></span>
+          <span>Visual Context</span><span class="ticker-dot"></span>
+          <span>Screen Sharing</span><span class="ticker-dot"></span>
+          <span>Camera Feed</span><span class="ticker-dot"></span>
+          <span>Low Latency</span><span class="ticker-dot"></span>
+          <span>Grounded AI</span><span class="ticker-dot"></span>
+          <span>Multilingual</span><span class="ticker-dot"></span>
+        </div>
+      </div>
+
+      <!-- How It Works -->
+      <div class="page-container">
+        <section class="how-section" id="how-it-works">
+          <div class="section-label">How It Works</div>
+          <h2 class="how-heading">Three steps to a live session.</h2>
+          <div class="how-grid">
+            <div class="how-card">
+              <div class="how-step-num">01</div>
+              <h3>Connect</h3>
+              <p>Click Connect and grant microphone access. Your session starts immediately with bi-directional audio.</p>
+            </div>
+            <div class="how-card">
+              <div class="how-step-num">02</div>
+              <h3>Share</h3>
+              <p>Optionally turn on your camera or share your screen so the assistant can see your context.</p>
+            </div>
+            <div class="how-card">
+              <div class="how-step-num">03</div>
+              <h3>Converse</h3>
+              <p>Talk, type, or both. The assistant keeps answers short, asks clarifying questions, and stays grounded.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Launch Card -->
+      <div class="page-container">
+        <div class="launch-card">
+          <div class="section-label">Session Launch</div>
+          <h3>Ready to start a live session?</h3>
+          <p>Connect once and the app will request microphone access immediately. Camera and screen sharing are optional.</p>
+          <div class="launch-actions">
+            <button id="connectBtnLaunch" class="btn btn-primary btn-arrow">Connect</button>
+          </div>
+          <div class="guardrail-panel">
+            <h4>Agent Guardrails</h4>
+            <ul>
+              <li>Uses only visible or stated context.</li>
+              <li>Flags uncertainty instead of bluffing.</li>
+              <li>Avoids harmful, deceptive, or high-risk instructions.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== Session End ===== -->
+    <div class="session-end-section hidden" id="session-end-section">
+      <div class="page-container">
+        <div class="session-end-card">
+          <div class="section-label">Session Complete</div>
+          <h2>Session Ended</h2>
+          <p>You can start a fresh conversation and reconnect your devices.</p>
+          <button id="restartBtn" class="btn btn-primary btn-arrow">Start New Session</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== App / Workspace Section ===== -->
+    <div class="app-section hidden" id="app-section">
+      <div class="page-container">
+        <section class="workspace-heading">
+          <div>
+            <div class="section-label">Live Session</div>
+            <h2>Multimodal Workspace</h2>
+          </div>
+          <p class="workspace-note">
+            Talk, type, or share visuals. The assistant stays grounded in what it hears and sees.
+          </p>
+        </section>
+
+        <div class="app-grid">
+          <div class="left-panel">
+            <div class="video-container">
+              <div id="video-placeholder">
+                Start camera or screen share to provide visual context
+              </div>
+              <video id="video-preview" autoplay playsinline muted></video>
+              <canvas id="video-canvas" style="display: none"></canvas>
+            </div>
+
+            <div class="session-meta">
+              <div class="meta-pill">Mic starts on connect</div>
+              <div class="meta-pill">Camera and screen are optional</div>
+              <div class="meta-pill" id="activeModelPill">Model: Gemini 3.1 Flash Live Preview</div>
+              <div class="meta-pill" id="activeVoicePill">Voice: Puck</div>
+            </div>
+
+            <div class="controls">
+              <button id="micBtn" class="btn btn-secondary icon-btn">Start Mic</button>
+              <button id="cameraBtn" class="btn btn-secondary icon-btn">Start Camera</button>
+              <button id="screenBtn" class="btn btn-secondary icon-btn">Share Screen</button>
+              <button id="disconnectBtn" class="btn danger icon-btn">Disconnect</button>
+            </div>
+          </div>
+
+          <div class="right-panel">
+            <div class="panel-header">
+              <h3>Conversation</h3>
+              <p>Transcripts appear here while audio continues in real time.</p>
+            </div>
+            <div id="noticeBanner" class="notice-banner">
+              Connect to begin a live session.
+            </div>
+            <div class="chat-log" id="chat-log"></div>
+            <div id="emptyState" class="empty-state">
+              The conversation will appear here once the session starts.
+            </div>
+            <div class="input-area">
+              <input
+                type="text"
+                id="textInput"
+                placeholder="Ask a question or describe what you need..."
+              />
+              <button id="sendBtn" class="btn btn-primary">Send</button>
+            </div>
+            <p class="composer-note">
+              Press Enter to send. Use camera or screen share when the answer depends on what is visible.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Footer ===== -->
+    <footer class="site-footer">
+      <div class="site-credit">Developed by <span>Vipul</span></div>
+    </footer>
+
+    <!-- ===== Feedback Modal ===== -->
+    <div
+      id="feedbackModal"
+      class="modal hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="feedbackTitle"
+    >
+      <div class="modal-backdrop" data-close-feedback></div>
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>
+            <div class="section-label">Feedback</div>
+            <h3 id="feedbackTitle">Send feedback</h3>
+          </div>
+          <button
+            id="closeFeedbackBtn"
+            class="icon-close"
+            aria-label="Close feedback form"
+          >
+            ×
+          </button>
+        </div>
+        <p class="modal-copy">
+          Your feedback is stored on the backend so you can review it later.
+        </p>
+        <form id="feedbackForm" class="feedback-form">
+          <label>
+            Name
+            <input
+              id="feedbackName"
+              type="text"
+              maxlength="120"
+              placeholder="Optional"
+            />
+          </label>
+          <label>
+            Email
+            <input
+              id="feedbackEmail"
+              type="email"
+              maxlength="254"
+              placeholder="Optional"
+            />
+          </label>
+          <label>
+            Rating
+            <select id="feedbackRating">
+              <option value="">Choose one</option>
+              <option value="5">5 - Excellent</option>
+              <option value="4">4 - Good</option>
+              <option value="3">3 - Okay</option>
+              <option value="2">2 - Needs work</option>
+              <option value="1">1 - Poor</option>
+            </select>
+          </label>
+          <label>
+            Feedback
+            <textarea
+              id="feedbackMessage"
+              rows="5"
+              maxlength="2000"
+              placeholder="Tell me what worked, what didn't, or what to improve"
+            ></textarea>
+          </label>
+          <div class="modal-actions">
+            <button
+              type="button"
+              id="cancelFeedbackBtn"
+              class="btn btn-secondary"
+            >
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">Submit Feedback</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="/static/media-handler.js?v=7"></script>
+    <script src="/static/gemini-client.js?v=9"></script>
+    <script src="/static/main.js?v=9"></script>
+  </body>
+</html>
