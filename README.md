@@ -28,16 +28,18 @@ The backend streams audio, text, and image context to Gemini Live and streams au
 - Google `google-genai` Python SDK for Gemini Live
 - Vanilla JavaScript frontend with no build step
 - Browser APIs for microphone, camera, screen sharing, and audio playback
-- Optional Twilio integration for phone-call streaming
 
 ## Project Structure
 
 ```text
 .
 ├── app
+│   ├── config.py
+│   ├── feedback.py
 │   ├── server.py
 │   ├── gemini_live.py
-│   ├── twilio_handler.py
+│   ├── live_session.py
+│   └── schemas.py
 ├── main.py
 ├── requirements.txt
 ├── Dockerfile
@@ -78,18 +80,9 @@ GEMINI_API_KEY=your_api_key_here
 MODEL=gemini-3.1-flash-live-preview
 ```
 
-Optional Twilio settings:
-
-```env
-TWILIO_ACCOUNT_SID=your_twilio_sid
-TWILIO_AUTH_TOKEN=your_twilio_auth_token
-TWILIO_APP_HOST=your-public-host
-```
-
 Notes:
 - `GEMINI_API_KEY` is required.
 - `MODEL` defaults to `gemini-3.1-flash-live-preview` if not set.
-- Twilio settings are only required if you use the phone-call endpoints.
 
 ## Run The App
 
@@ -154,12 +147,6 @@ It currently positions the model as `Live Desk`, a realtime multimodal workspace
   - primary browser session endpoint
   - receives audio bytes and text/image payloads
   - sends audio bytes and JSON transcript/session events
-
-### Twilio
-
-- `POST /twilio/inbound`
-- `POST /twilio/outbound`
-- `WS /twilio/stream`
 
 ## Development Notes
 

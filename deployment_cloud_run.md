@@ -46,36 +46,6 @@ gcloud run deploy gemini-live-demo \
 
 Once the deployment completes, the gcloud CLI will provide a Service URL (e.g., `https://gemini-live-demo-xxxx-uc.a.run.app`). Open this URL in your browser to interact with the demo.
 
-## Twilio Integration (Optional)
-
-If you are using the Twilio integration, store Twilio credentials in **Secret Manager**:
-
-```bash
-# Create secrets (reads values from your .env file)
-echo -n "$(grep TWILIO_ACCOUNT_SID .env | cut -d '=' -f2)" | gcloud secrets create TWILIO_ACCOUNT_SID --data-file=-
-echo -n "$(grep TWILIO_AUTH_TOKEN .env | cut -d '=' -f2)" | gcloud secrets create TWILIO_AUTH_TOKEN --data-file=-
-```
-
-Then deploy with all secrets:
-
-```bash
-gcloud run deploy gemini-live-demo \
-    --source . \
-    --set-secrets GEMINI_API_KEY=GEMINI_API_KEY:latest,TWILIO_ACCOUNT_SID=TWILIO_ACCOUNT_SID:latest,TWILIO_AUTH_TOKEN=TWILIO_AUTH_TOKEN:latest \
-    --allow-unauthenticated \
-    --region us-central1
-```
-
-Once deployed, copy the Service URL from the output and update the service with `TWILIO_APP_HOST`:
-
-```bash
-gcloud run services update gemini-live-demo \
-    --set-env-vars TWILIO_APP_HOST=your-cloud-run-url.run.app \
-    --region us-central1
-```
-
-Finally, update your Twilio Webhook URL in the Twilio Console to point to `https://YOUR_CLOUD_RUN_URL/twilio/inbound`.
-
 ## Local Testing with Docker
 
 Before deploying, you can test the container locally:
